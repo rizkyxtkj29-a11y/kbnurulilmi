@@ -1,0 +1,52 @@
+<!-- Facility: Playground Outdoor & Indoor -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 280" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgPlay" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f0fdf4" />
+      <stop offset="100%" stop-color="#bbf7d0" />
+    </linearGradient>
+  </defs>
+  <rect width="400" height="280" rx="24" fill="url(#bgPlay)" />
+
+  <!-- Green Grass Hill -->
+  <path d="M0 220 Q200 170 400 220 L400 280 L0 280 Z" fill="#22c55e" />
+
+  <!-- Children Slide (Perosotan) -->
+  <g transform="translate(60, 80)">
+    <!-- Ladder -->
+    <line x1="40" y1="20" x2="40" y2="140" stroke="#0284c7" stroke-width="6" stroke-linecap="round" />
+    <line x1="70" y1="20" x2="70" y2="140" stroke="#0284c7" stroke-width="6" stroke-linecap="round" />
+    <line x1="40" y1="50" x2="70" y2="50" stroke="#f59e0b" stroke-width="4" />
+    <line x1="40" y1="80" x2="70" y2="80" stroke="#f59e0b" stroke-width="4" />
+    <line x1="40" y1="110" x2="70" y2="110" stroke="#f59e0b" stroke-width="4" />
+    
+    <!-- Platform -->
+    <rect x="35" y="15" width="40" height="10" rx="4" fill="#ef4444" />
+
+    <!-- Slide chute -->
+    <path d="M70 25 C110 30, 130 90, 180 140" stroke="#f43f5e" stroke-width="14" stroke-linecap="round" fill="none" />
+    <path d="M70 20 C110 25, 130 85, 180 135" stroke="#fb7185" stroke-width="8" stroke-linecap="round" fill="none" />
+  </g>
+
+  <!-- Swing (Ayunan Ceria) -->
+  <g transform="translate(250, 70)">
+    <!-- A-Frame -->
+    <line x1="40" y1="20" x2="10" y2="150" stroke="#8b5cf6" stroke-width="6" stroke-linecap="round" />
+    <line x1="40" y1="20" x2="70" y2="150" stroke="#8b5cf6" stroke-width="6" stroke-linecap="round" />
+    <line x1="100" y1="20" x2="70" y2="150" stroke="#8b5cf6" stroke-width="6" stroke-linecap="round" />
+    <line x1="100" y1="20" x2="130" y2="150" stroke="#8b5cf6" stroke-width="6" stroke-linecap="round" />
+    <line x1="30" y1="20" x2="110" y2="20" stroke="#6d28d9" stroke-width="8" stroke-linecap="round" />
+
+    <!-- Ropes and Seat -->
+    <line x1="60" y1="20" x2="55" y2="100" stroke="#64748b" stroke-width="2" />
+    <line x1="80" y1="20" x2="85" y2="100" stroke="#64748b" stroke-width="2" />
+    <rect x="50" y="100" width="40" height="8" rx="3" fill="#f59e0b" />
+  </g>
+
+  <!-- Flowers & Sun -->
+  <circle cx="340" cy="50" r="22" fill="#facc15" />
+  <circle cx="50" cy="245" r="8" fill="#f43f5e" />
+  <circle cx="120" cy="240" r="8" fill="#eab308" />
+  <circle cx="330" cy="240" r="8" fill="#3b82f6" />
+  <text x="200" y="265" font-family="'Fredoka', sans-serif" font-size="16" font-weight="600" fill="#14532d" text-anchor="middle">Area Bermain Outdoor &amp; Playground</text>
+</svg>

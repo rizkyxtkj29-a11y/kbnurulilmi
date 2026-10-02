@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 80" width="100%" height="100%">
+  <defs>
+    <linearGradient id="utGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e3a8a" />
+      <stop offset="100%" stop-color="#0f172a" />
+    </linearGradient>
+  </defs>
+  <!-- Background Badge -->
+  <rect x="2" y="2" width="316" height="76" rx="16" fill="#ffffff" stroke="#e2e8f0" stroke-width="2" />
+  
+  <!-- UT Circle Icon -->
+  <g transform="translate(14, 10)">
+    <circle cx="30" cy="30" r="28" fill="#1e3a8a" />
+    <!-- Yellow Ribbon ring -->
+    <circle cx="30" cy="30" r="24" fill="none" stroke="#fbbf24" stroke-width="3" />
+    <!-- Open Book Motif inside -->
+    <path d="M18 34 C23 30, 27 30, 30 33 C33 30, 37 30, 42 34 L42 22 C37 19, 33 19, 30 22 C27 19, 23 19, 18 22 Z" fill="#ffffff" />
+    <!-- Flame / Torch of Education -->
+    <path d="M30 14 C28 17, 28 20, 30 22 C32 20, 32 17, 30 14 Z" fill="#fbbf24" />
+  </g>
+
+  <!-- Typography -->
+  <text x="82" y="32" font-family="'Plus Jakarta Sans', sans-serif" font-weight="800" font-size="14" fill="#1e3a8a" letter-spacing="0.5">UNIVERSITAS TERBUKA</text>
+  <text x="82" y="48" font-family="'Plus Jakarta Sans', sans-serif" font-weight="700" font-size="11" fill="#f59e0b" letter-spacing="1">KULIAH KERJA NYATA (KKN)</text>
+  <text x="82" y="63" font-family="'Plus Jakarta Sans', sans-serif" font-weight="500" font-size="9" fill="#64748b">Pengabdian Kepada Masyarakat</text>
+</svg>

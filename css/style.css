@@ -1,0 +1,220 @@
+/* ==========================================================================
+   PAUD-KB Nurul Ilmi Sumberadi - Custom Stylesheet
+   Tema: Ceria, Colorful, Ramah Anak, namun Rapi & Informatif untuk Orang Tua
+   ========================================================================== */
+
+:root {
+  --primary-blue: #0284c7;
+  --primary-blue-dark: #0369a1;
+  --secondary-yellow: #f59e0b;
+  --secondary-yellow-light: #fef3c7;
+  --accent-pink: #f43f5e;
+  --accent-green: #10b981;
+  --accent-purple: #8b5cf6;
+  --accent-orange: #f97316;
+  --bg-soft-blue: #f0f9ff;
+  --bg-soft-yellow: #fffbeb;
+  --bg-soft-green: #ecfdf5;
+}
+
+/* Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  color: #1e293b;
+  overflow-x: hidden;
+  max-width: 100vw;
+  width: 100%;
+  background-color: #fafbfc;
+}
+
+/* Playful Headings */
+h1, h2, h3, .font-playful {
+  font-family: 'Fredoka', 'Quicksand', sans-serif;
+}
+
+/* Floating Animations */
+@keyframes floatSlow {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-12px) rotate(2deg);
+  }
+}
+
+@keyframes floatReverse {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(10px) rotate(-2deg);
+  }
+}
+
+@keyframes pulseSubtle {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes waveMotion {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-25%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.animate-float-slow {
+  animation: floatSlow 5s ease-in-out infinite;
+}
+
+.animate-float-reverse {
+  animation: floatReverse 6s ease-in-out infinite;
+}
+
+.animate-pulse-subtle {
+  animation: pulseSubtle 3s ease-in-out infinite;
+}
+
+/* Wave Shapes & Dividers */
+.wave-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.wave-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+}
+
+/* Playful Badge Styles */
+.badge-rainbow {
+  background: linear-gradient(135deg, #f43f5e 0%, #f59e0b 50%, #10b981 100%);
+  color: white;
+}
+
+/* Glassmorphism Soft Effects */
+.glass-card {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+.glass-nav {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* Card Hover 3D Lift */
+.card-hover-lift {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.card-hover-lift:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Colorful Card Borders */
+.border-coral { border-color: #fca5a5; }
+.border-amber { border-color: #fde68a; }
+.border-emerald { border-color: #a7f3d0; }
+.border-sky { border-color: #bae6fd; }
+.border-violet { border-color: #ddd6fe; }
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 9999px;
+  border: 2px solid #f1f5f9;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Swiper Carousel Tweaks */
+.swiper-pagination-bullet {
+  width: 12px;
+  height: 12px;
+  background: #cbd5e1;
+  opacity: 0.8;
+  transition: all 0.3s;
+}
+.swiper-pagination-bullet-active {
+  width: 32px;
+  border-radius: 8px;
+  background: #0284c7 !important;
+  opacity: 1;
+}
+
+/* Modal Styling */
+dialog::backdrop {
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(4px);
+}
+
+dialog[open] {
+  animation: zoomIn 0.25s ease-out;
+}
+
+@keyframes zoomIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Dotted & Pattern Backgrounds */
+.bg-playful-dots {
+  background-image: radial-gradient(#cbd5e1 1.5px, transparent 1.5px);
+  background-size: 24px 24px;
+}
+
+.bg-playful-doodles {
+  background-color: #ffffff;
+  background-image: 
+    radial-gradient(#fed7aa 2px, transparent 2px),
+    radial-gradient(#bae6fd 2px, transparent 2px);
+  background-size: 40px 40px;
+  background-position: 0 0, 20px 20px;
+}
+
+/* Mobile Polish & Safety Guards (Viewport <= 640px / 393px) */
+@media (max-width: 640px) {
+  dialog {
+    max-width: calc(100vw - 1.5rem) !important;
+  }
+}

@@ -1,0 +1,33 @@
+<!-- Program Tahfidz Cilik & Nilai Islami -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 280" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgTahfidz" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ecfdf5" />
+      <stop offset="100%" stop-color="#d1fae5" />
+    </linearGradient>
+  </defs>
+  <rect width="400" height="280" rx="24" fill="url(#bgTahfidz)" />
+
+  <!-- Mosque Dome Silhouette in Background -->
+  <path d="M150 160 Q200 70 250 160 Z" fill="#a7f3d0" opacity="0.6" />
+  <circle cx="200" cy="70" r="10" fill="#10b981" />
+  <path d="M197 50 L203 50 L200 40 Z" fill="#10b981" />
+
+  <!-- Quran Rehal (Book Stand) -->
+  <g transform="translate(130, 110)">
+    <!-- Wooden stand cross -->
+    <polygon points="10,80 130,80 110,105 30,105" fill="#92400e" />
+    <polygon points="20,105 120,105 100,120 40,120" fill="#78350f" />
+    
+    <!-- Open Book Al-Quran -->
+    <path d="M15 50 Q70 30 125 50 L125 80 Q70 60 15 80 Z" fill="#ffffff" stroke="#059669" stroke-width="2" />
+    <path d="M70 40 L70 70" stroke="#10b981" stroke-width="2" />
+    <circle cx="70" cy="55" r="4" fill="#f59e0b" />
+  </g>
+
+  <!-- Glowing Crescent & Lantern -->
+  <path d="M70 60 A 30 30 0 0 0 95 100 A 38 38 0 0 1 70 60 Z" fill="#f59e0b" />
+  <circle cx="320" cy="80" r="14" fill="#fbbf24" />
+
+  <text x="200" y="255" font-family="'Fredoka', sans-serif" font-size="18" font-weight="600" fill="#065f46" text-anchor="middle">Tahfidz Juz Amma &amp; Doa Harian Ceria</text>
+</svg>

@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="50%" stop-color="#0284c7" />
+      <stop offset="100%" stop-color="#0369a1" />
+    </linearGradient>
+    <linearGradient id="sunGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fef08a" />
+      <stop offset="100%" stop-color="#f59e0b" />
+    </linearGradient>
+    <linearGradient id="bookGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="100%" stop-color="#f1f5f9" />
+    </linearGradient>
+    <linearGradient id="sproutGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#34d399" />
+      <stop offset="100%" stop-color="#059669" />
+    </linearGradient>
+    <filter id="dropShadow" x="-10%" y="-10%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="8" stdDeviation="6" flood-opacity="0.18" flood-color="#0f172a" />
+    </filter>
+  </defs>
+
+  <!-- Outer Playful Circle with Scalloped Edge / Cloud Base -->
+  <circle cx="200" cy="200" r="185" fill="#fef3c7" stroke="#fbbf24" stroke-width="6" />
+  <circle cx="200" cy="200" r="170" fill="url(#bgGrad)" filter="url(#dropShadow)" />
+
+  <!-- Sunshine Burst of Knowledge & Warmth -->
+  <circle cx="200" cy="150" r="65" fill="url(#sunGrad)" opacity="0.9" />
+  <!-- Sun Rays -->
+  <path d="M200 65 L200 45 M200 235 L200 255 M115 150 L95 150 M285 150 L305 150 M140 90 L125 75 M260 210 L275 225 M140 210 L125 225 M260 90 L275 75" stroke="#fef08a" stroke-width="6" stroke-linecap="round" />
+
+  <!-- Decorative Islamic Star of Excellence -->
+  <polygon points="200,85 206,102 224,102 210,113 215,130 200,120 185,130 190,113 176,102 194,102" fill="#ffffff" />
+
+  <!-- The Open Book (Al-Qur'an & Education) -->
+  <path d="M200 220 C185 200, 145 190, 100 200 L100 245 C150 235, 185 245, 200 265 C215 245, 250 235, 300 245 L300 200 C255 190, 215 200, 200 220 Z" fill="url(#bookGrad)" stroke="#0369a1" stroke-width="3" filter="url(#dropShadow)" />
+  <path d="M200 220 L200 265" stroke="#0284c7" stroke-width="3" />
+
+  <!-- Sprout of Growth & Children's Golden Age -->
+  <path d="M200 210 Q200 170 170 160 Q170 190 200 210 Z" fill="url(#sproutGrad)" />
+  <path d="M200 210 Q200 165 230 155 Q230 185 200 210 Z" fill="#10b981" />
+  <circle cx="200" cy="180" r="4" fill="#fef08a" />
+
+  <!-- Playful Ribbon / Banner with School Name -->
+  <path d="M50 310 Q200 280 350 310 L335 355 Q200 325 65 355 Z" fill="#f59e0b" filter="url(#dropShadow)" />
+  <path d="M50 310 L25 330 L65 355 Z" fill="#d97706" />
+  <path d="M350 310 L375 330 L335 355 Z" fill="#d97706" />
+
+  <!-- Text inside Ribbon -->
+  <text x="200" y="333" font-family="'Fredoka', 'Quicksand', sans-serif" font-weight="700" font-size="20" fill="#ffffff" text-anchor="middle" letter-spacing="1">PAUD - KB NURUL ILMI</text>
+  <text x="200" y="375" font-family="'Plus Jakarta Sans', sans-serif" font-weight="700" font-size="14" fill="#0f172a" text-anchor="middle" letter-spacing="2">SUMBERADI • MLATI • SLEMAN</text>
+
+  <!-- Little Joyful Floating Hearts & Stars -->
+  <circle cx="85" cy="120" r="10" fill="#f43f5e" />
+  <circle cx="315" cy="120" r="12" fill="#f59e0b" />
+  <circle cx="295" cy="175" r="8" fill="#10b981" />
+  <circle cx="105" cy="175" r="8" fill="#8b5cf6" />
+</svg>
