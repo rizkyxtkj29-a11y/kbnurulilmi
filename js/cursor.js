@@ -1,21 +1,22 @@
 /**
  * PAUD-KB Nurul Ilmi Sumberadi
- * Aesthetic Rainbow & Sparkles Cursor Trail
- * Animasi Kursor Pelangi Estetik, Lembut, & Ceria untuk Website Sekolah
+ * Butterfly Fluttering Cursor & Sparkle Blink-Blink Trail
+ * Efek Kursor Kupu-kupu Cantik Terbang dengan Taburan Bintang Blink-Blink Berkilau
  */
 
 (function () {
   'use strict';
 
-  // Deteksi kursor mouse nyata (pointer: fine) dan hormati preferensi reduced-motion
-  if (window.matchMedia && !window.matchMedia('(pointer: fine)').matches) return;
-  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  // Hormati preferensi reduced-motion pengguna
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    return;
+  }
 
-  // Siapkan canvas fullscreen
+  // 1. Buat Canvas Fullscreen Overlay
   const canvas = document.createElement('canvas');
   const ctx = canvas.getContext('2d');
 
-  canvas.id = 'aesthetic-rainbow-cursor';
+  canvas.id = 'butterfly-sparkle-cursor';
   canvas.setAttribute('aria-hidden', 'true');
   canvas.style.position = 'fixed';
   canvas.style.top = '0';
@@ -42,173 +43,360 @@
   resize();
   window.addEventListener('resize', resize, { passive: true });
 
-  // State Partikel & Kursor
-  const particles = [];
-  let mouseX = -100;
-  let mouseY = -100;
-  let followerX = -100;
-  let followerY = -100;
-  let lastX = null;
-  let lastY = null;
-  let lastMoveTime = 0;
-  let lastSpawnTime = 0;
-  let hue = 0;
-  let isMouseOver = false;
+  // 2. State Kursor & Kupu-kupu
+  let mouseX = -200;
+  let mouseY = -200;
+  let butterflyX = -200;
+  let butterflyY = -200;
+  let butterflyAngle = -Math.PI / 4;
+  let wingPhase = 0;
+  let globalHue = 320; // Mulai dari warna ceria magenta/pink pastel
+  let isMouseActive = false;
   let isHoveringInteractive = false;
+  let lastMoveTime = 0;
   let isRunning = false;
 
-  // Fungsi menggambar bintang 4 sisi bercahaya (✦ Sparkle)
-  function drawSparkleStar(context, cx, cy, spikes, outerRadius, innerRadius) {
-    let rot = (Math.PI / 2) * 3;
-    let x = cx;
-    let y = cy;
-    let step = Math.PI / spikes;
+  const sparkles = [];
 
-    context.beginPath();
-    context.moveTo(cx, cy - outerRadius);
-    for (let i = 0; i < spikes; i++) {
-      x = cx + Math.cos(rot) * outerRadius;
-      y = cy + Math.sin(rot) * outerRadius;
-      context.lineTo(x, y);
-      rot += step;
-
-      x = cx + Math.cos(rot) * innerRadius;
-      y = cy + Math.sin(rot) * innerRadius;
-      context.lineTo(x, y);
-      rot += step;
-    }
-    context.lineTo(cx, cy - outerRadius);
-    context.closePath();
-    context.fill();
+  // 3. Fungsi Gambar Bintang 4 Sisi (✦ Blink-Blink Diamond Star)
+  function drawDiamondSparkle(c, cx, cy, radius, innerRadius) {
+    c.beginPath();
+    c.moveTo(cx, cy - radius);
+    c.quadraticCurveTo(cx, cy, cx + radius, cy);
+    c.quadraticCurveTo(cx, cy, cx, cy + radius);
+    c.quadraticCurveTo(cx, cy, cx - radius, cy);
+    c.quadraticCurveTo(cx, cy, cx, cy - radius);
+    c.closePath();
+    c.fill();
   }
 
-  // Kelas Partikel Pelangi
-  class RainbowSparkle {
-    constructor(x, y, isClick = false) {
+  // Fungsi Gambar Bintang 6 Sisi Berkilau (★ Twinkle Star)
+  function drawTwinkleStar(c, cx, cy, spikes, outerRadius, innerRadius) {
+    let rot = (Math.PI / 2) * 3;
+    let step = Math.PI / spikes;
+    c.beginPath();
+    c.moveTo(cx, cy - outerRadius);
+    for (let i = 0; i < spikes; i++) {
+      c.lineTo(cx + Math.cos(rot) * outerRadius, cy + Math.sin(rot) * outerRadius);
+      rot += step;
+      c.lineTo(cx + Math.cos(rot) * innerRadius, cy + Math.sin(rot) * innerRadius);
+      rot += step;
+    }
+    c.closePath();
+    c.fill();
+  }
+
+  // 4. Kelas Partikel Blink-Blink (Bertaburan di Belakang Kupu-kupu)
+  class BlinkSparkle {
+    constructor(x, y, vx, vy, isBurst = false) {
       this.x = x;
       this.y = y;
-      this.initialSize = isClick ? Math.random() * 8 + 6 : Math.random() * 6 + 3.5;
+      this.initialSize = isBurst ? Math.random() * 8 + 5 : Math.random() * 6 + 3.2;
       this.size = this.initialSize;
 
-      const angle = Math.random() * Math.PI * 2;
-      const speed = isClick ? Math.random() * 4.5 + 1.8 : Math.random() * 1.6 + 0.4;
+      this.vx = vx;
+      this.vy = vy;
 
-      this.vx = Math.cos(angle) * speed;
-      this.vy = Math.sin(angle) * speed - (isClick ? 1.2 : 0.45); // Gerak melayang anggun
+      // Warna ceria pelangi & emas pastel
+      const huePalette = [330, 280, 195, 45, 160, 20]; // Pink, ungu, biru langit, emas kuning, toska, oranye
+      this.hue = huePalette[Math.floor(Math.random() * huePalette.length)];
 
-      this.hue = (hue + Math.random() * 40 - 20) % 360;
       this.alpha = 1;
-      this.decay = isClick ? Math.random() * 0.022 + 0.018 : Math.random() * 0.028 + 0.022;
-      this.rotation = Math.random() * Math.PI * 2;
-      this.vRot = (Math.random() - 0.5) * 0.16;
+      this.decay = isBurst ? Math.random() * 0.02 + 0.015 : Math.random() * 0.025 + 0.018;
 
-      // 70% Bintang berkilau ✦, 30% Gelembung pastel bercahaya 🫧
-      this.type = Math.random() > 0.3 ? 'star' : 'bubble';
+      // Efek berkedip (Blink-Blink)
+      this.twinklePhase = Math.random() * Math.PI * 2;
+      this.twinkleSpeed = Math.random() * 0.28 + 0.16;
+
+      this.rot = Math.random() * Math.PI * 2;
+      this.vRot = (Math.random() - 0.5) * 0.12;
+
+      // Tipe: Diamond 4-point (50%), Twinkle 6-point (35%), Micro-orb glitter (15%)
+      const randType = Math.random();
+      if (randType < 0.5) {
+        this.type = 'diamond';
+      } else if (randType < 0.85) {
+        this.type = 'twinkle';
+      } else {
+        this.type = 'orb';
+      }
     }
 
     update() {
       this.x += this.vx;
       this.y += this.vy;
-      this.vy += 0.025; // Efek gravitasi halus
-      this.vx *= 0.985;
-      this.rotation += this.vRot;
+      this.vy += 0.035; // Gerak melayang turun perlahan dengan anggun
+      this.vx *= 0.98;
+      this.rot += this.vRot;
+
+      this.twinklePhase += this.twinkleSpeed;
       this.alpha -= this.decay;
       this.size = Math.max(0, this.initialSize * (this.alpha > 0 ? this.alpha : 0));
     }
 
-    draw(context) {
-      if (this.alpha <= 0 || this.size <= 0.1) return;
+    draw(c) {
+      if (this.alpha <= 0 || this.size <= 0.2) return;
 
-      context.save();
-      context.translate(this.x, this.y);
-      context.rotate(this.rotation);
-      context.globalAlpha = Math.max(0, this.alpha);
+      // Menghitung intensitas kedip nyata (Blink-Blink)
+      const blinkIntensity = 0.45 + 0.55 * Math.sin(this.twinklePhase);
+      const currentAlpha = Math.max(0, Math.min(1, this.alpha * blinkIntensity));
 
-      // Glow estetik pelangi
-      context.shadowBlur = 10;
-      context.shadowColor = `hsla(${this.hue}, 95%, 65%, ${this.alpha * 0.9})`;
+      c.save();
+      c.translate(this.x, this.y);
+      c.rotate(this.rot);
+      c.globalAlpha = currentAlpha;
 
-      if (this.type === 'star') {
-        context.fillStyle = `hsla(${this.hue}, 95%, 70%, ${this.alpha})`;
-        drawSparkleStar(context, 0, 0, 4, this.size, this.size * 0.36);
+      // Kilau Cahaya (Glow Aura)
+      c.shadowBlur = 10;
+      c.shadowColor = `hsla(${this.hue}, 100%, 75%, ${currentAlpha * 0.9})`;
+
+      if (this.type === 'diamond') {
+        c.fillStyle = `hsla(${this.hue}, 95%, 80%, ${currentAlpha})`;
+        drawDiamondSparkle(c, 0, 0, this.size, this.size * 0.25);
+
+        // Titik putih terang di inti bintang
+        c.fillStyle = '#ffffff';
+        drawDiamondSparkle(c, 0, 0, this.size * 0.5, this.size * 0.12);
+      } else if (this.type === 'twinkle') {
+        c.fillStyle = `hsla(${this.hue}, 95%, 75%, ${currentAlpha})`;
+        drawTwinkleStar(c, 0, 0, 6, this.size, this.size * 0.38);
+
+        c.fillStyle = '#ffffff';
+        c.beginPath();
+        c.arc(0, 0, this.size * 0.3, 0, Math.PI * 2);
+        c.fill();
       } else {
-        // Bubble gelembung pelangi transparan
-        const grad = context.createRadialGradient(-this.size * 0.3, -this.size * 0.3, 0, 0, 0, this.size);
-        grad.addColorStop(0, '#ffffff');
-        grad.addColorStop(0.4, `hsla(${this.hue}, 90%, 75%, ${this.alpha})`);
-        grad.addColorStop(1, `hsla(${this.hue}, 95%, 60%, ${this.alpha * 0.65})`);
-        context.fillStyle = grad;
-        context.beginPath();
-        context.arc(0, 0, this.size, 0, Math.PI * 2);
-        context.fill();
+        // Lingkaran glitter lembut
+        c.fillStyle = `hsla(${this.hue}, 100%, 85%, ${currentAlpha})`;
+        c.beginPath();
+        c.arc(0, 0, this.size * 0.7, 0, Math.PI * 2);
+        c.fill();
       }
 
-      context.restore();
+      c.restore();
     }
   }
 
-  function spawnParticles(x, y, count = 2, isClick = false) {
+  // 5. Fungsi Menggambar Kupu-Kupu Indah yang Sedang Terbang
+  function drawButterfly(c, x, y, angle, wingSpread, hue, isHover) {
+    c.save();
+    c.translate(x, y);
+    c.rotate(angle);
+
+    const scale = isHover ? 1.25 : 1.05;
+    c.scale(scale, scale);
+
+    // Cahaya bercahaya lembut di sekeliling kupu-kupu
+    c.shadowBlur = 14;
+    c.shadowColor = `hsla(${hue}, 100%, 70%, 0.85)`;
+
+    // Sayap Kupu-kupu (Dua Sisi: Kiri & Kanan dengan Kepakan 3D)
+    // wingSpread berkisar antara 0.25 (sayap terlipat) sampai 1.0 (sayap terbuka penuh)
+    const sides = [1, -1]; // Kanan (1) dan Kiri (-1)
+
+    sides.forEach((side) => {
+      c.save();
+      c.scale(side * wingSpread, 1);
+
+      // --- Sayap Atas (Forewing: Lebih besar, bergradasi cerah) ---
+      const upperGrad = c.createRadialGradient(8, -8, 2, 16, -14, 26);
+      upperGrad.addColorStop(0, '#ffffff');
+      upperGrad.addColorStop(0.25, `hsla(${hue}, 95%, 75%, 0.95)`);
+      upperGrad.addColorStop(0.65, `hsla(${(hue + 40) % 360}, 95%, 65%, 0.9)`);
+      upperGrad.addColorStop(1, `hsla(${(hue + 80) % 360}, 100%, 60%, 0.8)`);
+
+      c.beginPath();
+      c.moveTo(1, -2);
+      c.bezierCurveTo(8, -14, 18, -24, 25, -20);
+      c.bezierCurveTo(30, -16, 28, -4, 20, 2);
+      c.bezierCurveTo(14, 6, 6, 2, 1, 1);
+      c.closePath();
+
+      c.fillStyle = upperGrad;
+      c.fill();
+      c.lineWidth = 1.2;
+      c.strokeStyle = `hsla(${hue}, 90%, 40%, 0.5)`;
+      c.stroke();
+
+      // Pola Bintik Indah di Tepi Sayap Atas (Motif Kupu-kupu)
+      c.fillStyle = '#ffffff';
+      c.beginPath();
+      c.arc(22, -16, 1.8, 0, Math.PI * 2);
+      c.arc(18, -20, 1.4, 0, Math.PI * 2);
+      c.arc(24, -10, 1.4, 0, Math.PI * 2);
+      c.fill();
+
+      // --- Sayap Bawah (Hindwing: Bulat ceria) ---
+      const lowerGrad = c.createRadialGradient(6, 6, 1, 12, 12, 18);
+      lowerGrad.addColorStop(0, '#ffffff');
+      lowerGrad.addColorStop(0.3, `hsla(${(hue + 50) % 360}, 95%, 75%, 0.92)`);
+      lowerGrad.addColorStop(0.7, `hsla(${(hue + 100) % 360}, 90%, 65%, 0.88)`);
+      lowerGrad.addColorStop(1, `hsla(${(hue + 140) % 360}, 95%, 55%, 0.75)`);
+
+      c.beginPath();
+      c.moveTo(1, 2);
+      c.bezierCurveTo(8, 5, 18, 8, 17, 18);
+      c.bezierCurveTo(15, 23, 7, 24, 2, 16);
+      c.bezierCurveTo(0, 12, 0, 7, 1, 2);
+      c.closePath();
+
+      c.fillStyle = lowerGrad;
+      c.fill();
+      c.lineWidth = 1.0;
+      c.strokeStyle = `hsla(${(hue + 60) % 360}, 90%, 40%, 0.45)`;
+      c.stroke();
+
+      // Bintik di Sayap Bawah
+      c.fillStyle = `hsla(${hue}, 100%, 95%, 0.9)`;
+      c.beginPath();
+      c.arc(13, 17, 1.4, 0, Math.PI * 2);
+      c.arc(8, 20, 1.2, 0, Math.PI * 2);
+      c.fill();
+
+      c.restore();
+    });
+
+    // --- Tubuh Kupu-kupu (Body) ---
+    c.shadowBlur = 4;
+    c.shadowColor = '#0f172a';
+
+    // Perut & Dada
+    c.fillStyle = '#1e1b4b';
+    c.beginPath();
+    c.ellipse(0, 2, 2.2, 8.5, 0, 0, Math.PI * 2);
+    c.fill();
+
+    // Kepala Kupu-kupu
+    c.beginPath();
+    c.arc(0, -7.5, 2.5, 0, Math.PI * 2);
+    c.fillStyle = '#0f172a';
+    c.fill();
+
+    // Kilau Emas di Punggung Tubuh
+    c.fillStyle = '#fbbf24';
+    c.beginPath();
+    c.ellipse(0, 0, 1.2, 5, 0, 0, Math.PI * 2);
+    c.fill();
+
+    // --- Antena Kupu-kupu dengan Ujung Berkilau ---
+    c.lineWidth = 1.3;
+    c.strokeStyle = '#1e1b4b';
+
+    // Antena Kiri
+    c.beginPath();
+    c.moveTo(-0.8, -9);
+    c.quadraticCurveTo(-5, -15, -8, -18);
+    c.stroke();
+
+    // Antena Kanan
+    c.beginPath();
+    c.moveTo(0.8, -9);
+    c.quadraticCurveTo(5, -15, 8, -18);
+    c.stroke();
+
+    // Ujung Antena Berpendar (Golden Tips)
+    c.fillStyle = '#fde047';
+    c.shadowBlur = 8;
+    c.shadowColor = '#facc15';
+    c.beginPath();
+    c.arc(-8, -18, 1.6, 0, Math.PI * 2);
+    c.arc(8, -18, 1.6, 0, Math.PI * 2);
+    c.fill();
+
+    c.restore();
+  }
+
+  // 6. Spawn Partikel Bertaburan di Belakang Kupu-Kupu
+  function spawnTrailSparkles(x, y, count = 2, angle = 0, isBurst = false) {
     for (let i = 0; i < count; i++) {
-      const offsetX = (Math.random() - 0.5) * 8;
-      const offsetY = (Math.random() - 0.5) * 8;
-      particles.push(new RainbowSparkle(x + offsetX, y + offsetY, isClick));
+      let vx, vy;
+      if (isBurst) {
+        const spreadAngle = Math.random() * Math.PI * 2;
+        const speed = Math.random() * 4.5 + 1.8;
+        vx = Math.cos(spreadAngle) * speed;
+        vy = Math.sin(spreadAngle) * speed - 1.2;
+      } else {
+        // Meluncur berlawanan arah terbang kupu-kupu dengan hembusan angin
+        const backAngle = angle + Math.PI + (Math.random() - 0.5) * 1.2;
+        const speed = Math.random() * 1.8 + 0.6;
+        vx = Math.cos(backAngle) * speed + (Math.random() - 0.5) * 0.8;
+        vy = Math.sin(backAngle) * speed - (Math.random() * 0.8 + 0.2);
+      }
+
+      const jitterX = (Math.random() - 0.5) * 8;
+      const jitterY = (Math.random() - 0.5) * 8;
+
+      sparkles.push(new BlinkSparkle(x + jitterX, y + jitterY, vx, vy, isBurst));
     }
-    startLoop();
+
+    startAnimationLoop();
   }
 
-  function startLoop() {
+  function startAnimationLoop() {
     if (!isRunning) {
       isRunning = true;
       requestAnimationFrame(render);
     }
   }
 
-  function render(time) {
+  // 7. Loop Utama Animasi (60fps)
+  function render(timestamp) {
     ctx.clearRect(0, 0, width, height);
 
-    // 1. Gambar cincin pelangi lembut pengikut kursor (Cursor Follower Ring)
-    const timeSinceMove = time - lastMoveTime;
-    if (isMouseOver && followerX > 0 && followerY > 0 && timeSinceMove < 2500) {
-      // Lerp interpolasi halus agar mengikuti mouse dengan mulus
-      followerX += (mouseX - followerX) * 0.22;
-      followerY += (mouseY - followerY) * 0.22;
+    const now = performance.now();
+    const timeSinceMove = now - lastMoveTime;
 
-      const followerAlpha = Math.max(0, 1 - timeSinceMove / 2500);
-      const ringRadius = isHoveringInteractive ? 16 : 10;
+    // Perbarui & Gambar Kupu-kupu jika kursor aktif
+    if (isMouseActive && butterflyX > -150) {
+      // Lerp Halus: Kupu-kupu terbang mengejar kursor dengan gerakan anggun
+      const followSpeed = isHoveringInteractive ? 0.22 : 0.16;
+      const dx = mouseX - butterflyX;
+      const dy = mouseY - butterflyY;
+      const dist = Math.hypot(dx, dy);
 
-      ctx.save();
-      ctx.globalAlpha = followerAlpha * (isHoveringInteractive ? 0.9 : 0.7);
-      ctx.shadowBlur = 12;
-      ctx.shadowColor = `hsla(${hue}, 100%, 65%, 0.8)`;
+      butterflyX += dx * followSpeed;
+      butterflyY += dy * followSpeed;
 
-      // Gradien cincin pelangi berputar
-      ctx.beginPath();
-      ctx.arc(followerX, followerY, ringRadius, 0, Math.PI * 2);
-      ctx.lineWidth = isHoveringInteractive ? 2.5 : 1.8;
-      ctx.strokeStyle = `hsla(${hue}, 95%, 65%, ${followerAlpha})`;
-      ctx.stroke();
+      // Putar kupu-kupu menghadap ke arah terbangnya
+      if (dist > 1.5) {
+        const targetAngle = Math.atan2(dy, dx) - Math.PI / 2;
+        let angleDiff = targetAngle - butterflyAngle;
 
-      // Titik tengah berkilau
-      ctx.beginPath();
-      ctx.arc(followerX, followerY, 2.5, 0, Math.PI * 2);
-      ctx.fillStyle = `hsla(${(hue + 180) % 360}, 100%, 80%, ${followerAlpha})`;
-      ctx.fill();
+        // Normalisasi sudut delta terkecil
+        while (angleDiff < -Math.PI) angleDiff += Math.PI * 2;
+        while (angleDiff > Math.PI) angleDiff -= Math.PI * 2;
 
-      ctx.restore();
+        butterflyAngle += angleDiff * 0.18;
+      }
+
+      // Frekuensi kepakan sayap:
+      // Makin cepat terbang = kepakan sayap makin cepat & lincah
+      const flapSpeed = dist > 2
+        ? 0.22 + Math.min(dist * 0.02, 0.45)
+        : (isHoveringInteractive ? 0.25 : 0.12); // Saat diam, tetap bernapas/mengepak lembut
+
+      wingPhase += flapSpeed;
+      const wingSpread = 0.25 + 0.75 * Math.abs(Math.cos(wingPhase));
+
+      // Rotasi warna pelangi kupu-kupu seiring terbang
+      globalHue = (globalHue + 0.5) % 360;
+
+      // Gambar Kupu-kupu
+      drawButterfly(ctx, butterflyX, butterflyY, butterflyAngle, wingSpread, globalHue, isHoveringInteractive);
     }
 
-    // 2. Perbarui & Gambar Jejak Partikel Pelangi
-    for (let i = particles.length - 1; i >= 0; i--) {
-      const p = particles[i];
-      p.update();
-      p.draw(ctx);
-      if (p.alpha <= 0) {
-        particles.splice(i, 1);
+    // Perbarui & Gambar Taburan Bintang Blink-Blink
+    for (let i = sparkles.length - 1; i >= 0; i--) {
+      const s = sparkles[i];
+      s.update();
+      s.draw(ctx);
+      if (s.alpha <= 0 || s.size <= 0.2) {
+        sparkles.splice(i, 1);
       }
     }
 
-    // Lanjutkan animasi jika masih ada partikel atau kursor sedang aktif bergerak
-    if (particles.length > 0 || (isMouseOver && timeSinceMove < 2500)) {
+    // Lanjutkan frame jika ada partikel aktif atau kursor masih aktif
+    if (sparkles.length > 0 || (isMouseActive && timeSinceMove < 4000)) {
       requestAnimationFrame(render);
     } else {
       isRunning = false;
@@ -216,70 +404,87 @@
     }
   }
 
-  // Event Listener Mouse Move
-  window.addEventListener('mousemove', (e) => {
-    isMouseOver = true;
+  // 8. Event Listener Mouse Move & Touch
+  let lastSpawnDistance = 0;
+  let lastTrackX = 0;
+  let lastTrackY = 0;
+
+  function handlePointerMove(clientX, clientY) {
+    isMouseActive = true;
     const now = performance.now();
     lastMoveTime = now;
 
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-
-    if (followerX === -100) {
-      followerX = mouseX;
-      followerY = mouseY;
+    // Inisialisasi posisi awal kupu-kupu dekat kursor jika pertama kali
+    if (butterflyX < -100) {
+      butterflyX = clientX;
+      butterflyY = clientY;
+      lastTrackX = clientX;
+      lastTrackY = clientY;
     }
 
-    // Perubahan gradasi warna pelangi setiap pergeseran kursor
-    hue = (hue + 5) % 360;
+    mouseX = clientX;
+    mouseY = clientY;
 
-    // Periksa apakah kursor berada di atas tombol, link, atau elemen interaktif
+    // Cek jarak gerak sejak spawn terakhir
+    const dist = Math.hypot(clientX - lastTrackX, clientY - lastTrackY);
+    lastSpawnDistance += dist;
+
+    // Setiap gerakan (jarak > 10px), taburkan bintang blink-blink di belakang kupu-kupu!
+    if (lastSpawnDistance >= 10) {
+      const sparkleCount = isHoveringInteractive ? 3 : 2;
+      spawnTrailSparkles(butterflyX, butterflyY, sparkleCount, butterflyAngle, false);
+      lastSpawnDistance = 0;
+      lastTrackX = clientX;
+      lastTrackY = clientY;
+    }
+
+    startAnimationLoop();
+  }
+
+  window.addEventListener('mousemove', (e) => {
+    // Deteksi hover pada elemen interaktif
     const target = e.target;
     isHoveringInteractive = !!(target && (
       target.closest('a') ||
       target.closest('button') ||
       target.closest('input') ||
+      target.closest('select') ||
       target.closest('textarea') ||
-      target.closest('.gallery-item')
+      target.closest('.gallery-item') ||
+      target.closest('.card-hover-lift')
     ));
 
-    // Pembuatan jejak partikel berdasarkan jarak perpindahan
-    if (lastX !== null && lastY !== null) {
-      const dist = Math.hypot(mouseX - lastX, mouseY - lastY);
+    handlePointerMove(e.clientX, e.clientY);
+  }, { passive: true });
 
-      if (dist > 3 && now - lastSpawnTime > 14) {
-        const count = isHoveringInteractive
-          ? Math.min(4, Math.max(2, Math.floor(dist / 10)))
-          : Math.min(3, Math.max(1, Math.floor(dist / 14)));
-
-        spawnParticles(mouseX, mouseY, count, false);
-        lastSpawnTime = now;
-      }
-    } else {
-      spawnParticles(mouseX, mouseY, 1, false);
-      lastSpawnTime = now;
+  // Dukungan Layar Sentuh (Mobile Touch)
+  window.addEventListener('touchmove', (e) => {
+    if (e.touches && e.touches[0]) {
+      handlePointerMove(e.touches[0].clientX, e.touches[0].clientY);
     }
-
-    lastX = mouseX;
-    lastY = mouseY;
-    startLoop();
   }, { passive: true });
 
-  // Event Listener Mouse Click (Efek Letupan Bintang Pelangi Menyenangkan)
+  window.addEventListener('touchstart', (e) => {
+    if (e.touches && e.touches[0]) {
+      handlePointerMove(e.touches[0].clientX, e.touches[0].clientY);
+      spawnTrailSparkles(e.touches[0].clientX, e.touches[0].clientY, 8, 0, true);
+    }
+  }, { passive: true });
+
+  // 9. Event Click (Letupan Indah Bintang Blink-Blink)
   window.addEventListener('click', (e) => {
-    hue = (hue + 50) % 360;
-    spawnParticles(e.clientX, e.clientY, 10, true);
+    globalHue = (globalHue + 45) % 360;
+    // Letupan taburan blink-blink spektakuler saat mengklik
+    spawnTrailSparkles(e.clientX, e.clientY, 16, butterflyAngle, true);
   }, { passive: true });
 
-  // Event Mouse Keluar Jendela
+  // 10. Event Mouse Keluar Jendela
   window.addEventListener('mouseleave', () => {
-    isMouseOver = false;
-    lastX = null;
-    lastY = null;
+    isMouseActive = false;
   });
 
   window.addEventListener('mouseenter', () => {
-    isMouseOver = true;
+    isMouseActive = true;
   });
 
 })();

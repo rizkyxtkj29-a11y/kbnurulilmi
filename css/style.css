@@ -212,6 +212,59 @@ dialog[open] {
   background-position: 0 0, 20px 20px;
 }
 
+/* ==========================================================================
+   Tema Ceria & Warna-warni Anak (Playful, Colorful & Lively)
+   ========================================================================== */
+
+/* Shimmering Rainbow Text */
+.text-rainbow-glow {
+  background: linear-gradient(135deg, #f43f5e, #fb923c, #f59e0b, #10b981, #0284c7, #8b5cf6, #f43f5e);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: rainbowShift 6s ease-in-out infinite;
+}
+
+@keyframes rainbowShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Latar Belakang Bintik Ceria Warna-Warni */
+.bg-playful-candy {
+  background-color: #fbfcfe;
+  background-image: 
+    radial-gradient(#fca5a5 2px, transparent 2px),
+    radial-gradient(#93c5fd 2px, transparent 2px),
+    radial-gradient(#fde047 2px, transparent 2px),
+    radial-gradient(#86efac 2px, transparent 2px);
+  background-size: 80px 80px, 90px 90px, 100px 100px, 110px 110px;
+  background-position: 0 0, 40px 40px, 20px 60px, 60px 20px;
+}
+
+/* Hover Efek Warna-Warni Berpendar (Rainbow Glow) */
+.card-hover-rainbow {
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.card-hover-rainbow:hover {
+  transform: translateY(-8px) scale(1.015);
+  box-shadow: 0 20px 30px -10px rgba(245, 158, 11, 0.25),
+              0 10px 20px -8px rgba(14, 165, 233, 0.2),
+              0 0 20px rgba(244, 63, 94, 0.12);
+}
+
+/* Tombol Beranimasi Ceria & Membal */
+.btn-playful {
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.btn-playful:hover {
+  transform: translateY(-3px) scale(1.03);
+}
+.btn-playful:active {
+  transform: translateY(1px) scale(0.98);
+}
+
 /* Mobile Polish & Safety Guards (Viewport <= 640px / 393px) */
 @media (max-width: 640px) {
   dialog {
