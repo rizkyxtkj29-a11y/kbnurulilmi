@@ -12,6 +12,12 @@
     return;
   }
 
+  // Hanya aktifkan kursor kupu-kupu di perangkat pointer/mouse (desktop/laptop).
+  // Nonaktifkan di HP / touch device agar scrolling super mulus 60fps tanpa lag & hemat baterai.
+  if (!window.matchMedia || !window.matchMedia('(pointer: fine)').matches) {
+    return;
+  }
+
   // 1. Buat Canvas Fullscreen Overlay
   const canvas = document.createElement('canvas');
   const ctx = canvas.getContext('2d');
@@ -329,6 +335,11 @@
       sparkles.push(new BlinkSparkle(x + jitterX, y + jitterY, vx, vy, isBurst));
     }
 
+    // Batasi maksimum 25 partikel aktif agar tidak membebani kartu grafis & CPU
+    if (sparkles.length > 25) {
+      sparkles.splice(0, sparkles.length - 25);
+    }
+
     startAnimationLoop();
   }
 
@@ -395,8 +406,8 @@
       }
     }
 
-    // Lanjutkan frame jika ada partikel aktif atau kursor masih aktif
-    if (sparkles.length > 0 || (isMouseActive && timeSinceMove < 4000)) {
+    // Lanjutkan frame hanya jika ada partikel aktif atau kursor baru saja digerakkan (<1.2 detik)
+    if (sparkles.length > 0 || (isMouseActive && timeSinceMove < 1200)) {
       requestAnimationFrame(render);
     } else {
       isRunning = false;
@@ -404,7 +415,7 @@
     }
   }
 
-  // 8. Event Listener Mouse Move & Touch
+  // 8. Event Listener Mouse Move
   let lastSpawnDistance = 0;
   let lastTrackX = 0;
   let lastTrackY = 0;
@@ -457,34 +468,28 @@
     handlePointerMove(e.clientX, e.clientY);
   }, { passive: true });
 
-  // Dukungan Layar Sentuh (Mobile Touch)
-  window.addEventListener('touchmove', (e) => {
-    if (e.touches && e.touches[0]) {
-      handlePointerMove(e.touches[0].clientX, e.touches[0].clientY);
-    }
-  }, { passive: true });
-
-  window.addEventListener('touchstart', (e) => {
-    if (e.touches && e.touches[0]) {
-      handlePointerMove(e.touches[0].clientX, e.touches[0].clientY);
-      spawnTrailSparkles(e.touches[0].clientX, e.touches[0].clientY, 8, 0, true);
-    }
-  }, { passive: true });
-
   // 9. Event Click (Letupan Indah Bintang Blink-Blink)
   window.addEventListener('click', (e) => {
     globalHue = (globalHue + 45) % 360;
     // Letupan taburan blink-blink spektakuler saat mengklik
-    spawnTrailSparkles(e.clientX, e.clientY, 16, butterflyAngle, true);
+    spawnTrailSparkles(e.clientX, e.clientY, 12, butterflyAngle, true);
   }, { passive: true });
 
-  // 10. Event Mouse Keluar Jendela
+  // 10. Event Mouse Keluar / Masuk Jendela
   window.addEventListener('mouseleave', () => {
     isMouseActive = false;
   });
 
   window.addEventListener('mouseenter', () => {
     isMouseActive = true;
+  });
+
+  // Hentikan loop jika tab browser diminimalkan / tidak aktif
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      isRunning = false;
+      ctx.clearRect(0, 0, width, height);
+    }
   });
 
 })();

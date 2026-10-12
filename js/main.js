@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
       headerNav?.classList.remove('shadow-md', 'bg-white/95');
       headerNav?.classList.add('bg-white');
     }
-  });
+  }, { passive: true });
 
   // 3. Counter Animation for Stat Metrics
   const counters = document.querySelectorAll('.counter-value');
