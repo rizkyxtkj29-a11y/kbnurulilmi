@@ -105,6 +105,11 @@ document.addEventListener('DOMContentLoaded', () => {
   openPpdbBtns.forEach(btn => {
     btn.addEventListener('click', (e) => {
       e.preventDefault();
+      const targetJenjang = btn.getAttribute('data-jenjang');
+      const selectJenjang = document.getElementById('ppdb-jenjang');
+      if (targetJenjang && selectJenjang) {
+        selectJenjang.value = targetJenjang;
+      }
       if (ppdbModal) {
         ppdbModal.showModal();
       }
