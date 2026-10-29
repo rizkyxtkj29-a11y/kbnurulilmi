@@ -72,13 +72,13 @@
   <!-- =========================================================================
        1. TOP ANNOUNCEMENT & MARQUEE BAR
        ========================================================================= -->
-  <div class="bg-gradient-to-r from-brand-sky via-brand-purple to-brand-pink text-white text-xs sm:text-sm py-2 px-4 shadow-sm relative z-50">
-    <div class="max-w-7xl mx-auto flex items-center justify-between gap-3">
-      <div class="flex items-center space-x-2 overflow-hidden whitespace-nowrap">
-        <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-bold bg-white text-brand-sky animate-pulse shadow-sm shrink-0">
+  <div class="bg-gradient-to-r from-brand-sky via-brand-purple to-brand-pink text-white text-xs sm:text-sm py-1.5 sm:py-2 px-2.5 sm:px-4 shadow-sm relative z-50">
+    <div class="max-w-7xl mx-auto flex items-center justify-between gap-2 sm:gap-3 min-w-0">
+      <div class="flex items-center space-x-1.5 sm:space-x-2 overflow-hidden whitespace-nowrap min-w-0">
+        <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] sm:text-xs font-bold bg-white text-brand-sky animate-pulse shadow-sm shrink-0">
           <i class="fa-solid fa-wand-magic-sparkles text-amber-500"></i> INFO PPDB 🌈
         </span>
-        <span class="font-medium truncate text-xs sm:text-sm">
+        <span class="font-medium truncate text-[11px] sm:text-sm">
           Penerimaan Peserta Didik Baru (PPDB) PAUD &amp; Kelompok Bermain Telah Dibuka!
         </span>
       </div>
@@ -110,25 +110,25 @@
       <div class="flex items-center justify-between h-16 sm:h-20 gap-2 sm:gap-4">
         
         <!-- School Logo & Branding (Responsive, No Overflow on Mobile) -->
-        <a href="#beranda" class="flex items-center gap-2 sm:gap-3 shrink-0 group min-w-0">
-          <img src="assets/logo.svg" alt="Logo PAUD-KB Nurul Ilmi" class="h-9 w-9 sm:h-14 sm:w-14 object-contain group-hover:rotate-6 transition-transform duration-300 drop-shadow-sm shrink-0">
-          <div class="flex flex-col whitespace-nowrap overflow-hidden">
-            <span class="text-base sm:text-2xl font-bold font-playful text-brand-sky leading-tight">
+        <a href="#beranda" class="flex items-center gap-1.5 sm:gap-3 shrink-0 group min-w-0">
+          <img src="assets/logo.svg" alt="Logo PAUD-KB Nurul Ilmi" class="h-8 w-8 sm:h-12 sm:w-12 xl:h-14 xl:w-14 object-contain group-hover:rotate-6 transition-transform duration-300 drop-shadow-sm shrink-0">
+          <div class="flex flex-col whitespace-nowrap overflow-hidden min-w-0">
+            <span class="text-sm min-[380px]:text-base sm:text-xl xl:text-xl 2xl:text-2xl font-bold font-playful text-brand-sky leading-tight truncate">
               PAUD-KB <span class="text-brand-orange">Nurul Ilmi</span>
             </span>
-            <span class="text-[10px] sm:text-xs font-semibold text-slate-500 tracking-wide leading-none mt-0.5">
+            <span class="text-[9px] min-[360px]:text-[10px] sm:text-xs font-semibold text-slate-500 tracking-wide leading-none mt-0.5 hidden min-[320px]:block truncate">
               Sumberadi, Mlati, Sleman
             </span>
           </div>
         </a>
 
         <!-- Desktop Navigation Menu (Neat Dropdowns, Wrap-Proof, Elegant Spacing) -->
-        <nav class="hidden xl:flex items-center space-x-1 font-semibold text-sm text-slate-700">
-          <a href="#beranda" class="px-3 py-2 rounded-xl text-brand-sky hover:bg-sky-50 transition-colors whitespace-nowrap">Beranda</a>
+        <nav class="hidden xl:flex items-center space-x-0.5 2xl:space-x-1 font-semibold text-xs 2xl:text-sm text-slate-700">
+          <a href="#beranda" class="px-2 2xl:px-3 py-1.5 2xl:py-2 rounded-xl text-brand-sky hover:bg-sky-50 transition-colors whitespace-nowrap">Beranda</a>
           
           <!-- Dropdown: Tentang Kami -->
           <div class="relative group">
-            <button type="button" class="flex items-center gap-1.5 px-3 py-2 rounded-xl hover:text-brand-sky hover:bg-sky-50 transition-colors whitespace-nowrap">
+            <button type="button" class="flex items-center gap-1 px-2 2xl:px-3 py-1.5 2xl:py-2 rounded-xl hover:text-brand-sky hover:bg-sky-50 transition-colors whitespace-nowrap">
               <span>Tentang Kami</span>
               <i class="fa-solid fa-chevron-down text-[10px] text-slate-400 group-hover:rotate-180 transition-transform"></i>
             </button>
@@ -143,7 +143,7 @@
 
           <!-- Dropdown: Program Belajar & Biaya -->
           <div class="relative group">
-            <button type="button" class="flex items-center gap-1.5 px-3 py-2 rounded-xl hover:text-brand-sky hover:bg-sky-50 transition-colors whitespace-nowrap">
+            <button type="button" class="flex items-center gap-1 px-2 2xl:px-3 py-1.5 2xl:py-2 rounded-xl hover:text-brand-sky hover:bg-sky-50 transition-colors whitespace-nowrap">
               <span>Program &amp; Biaya</span>
               <i class="fa-solid fa-chevron-down text-[10px] text-slate-400 group-hover:rotate-180 transition-transform"></i>
             </button>
@@ -158,27 +158,27 @@
             </div>
           </div>
 
-          <a href="#fasilitas" class="px-3 py-2 rounded-xl hover:text-brand-sky hover:bg-sky-50 transition-colors whitespace-nowrap">Fasilitas</a>
-          <a href="#galeri" class="px-3 py-2 rounded-xl hover:text-brand-sky hover:bg-sky-50 transition-colors whitespace-nowrap">Galeri</a>
-          <a href="#berita" class="px-3 py-2 rounded-xl hover:text-brand-sky hover:bg-sky-50 transition-colors whitespace-nowrap">Berita</a>
-          <a href="#faq" class="px-3 py-2 rounded-xl hover:text-brand-sky hover:bg-sky-50 transition-colors whitespace-nowrap">Tanya Jawab</a>
-          <a href="#kontak" class="px-3 py-2 rounded-xl hover:text-brand-sky hover:bg-sky-50 transition-colors whitespace-nowrap">Kontak</a>
+          <a href="#fasilitas" class="px-2 2xl:px-3 py-1.5 2xl:py-2 rounded-xl hover:text-brand-sky hover:bg-sky-50 transition-colors whitespace-nowrap">Fasilitas</a>
+          <a href="#galeri" class="px-2 2xl:px-3 py-1.5 2xl:py-2 rounded-xl hover:text-brand-sky hover:bg-sky-50 transition-colors whitespace-nowrap">Galeri</a>
+          <a href="#berita" class="px-2 2xl:px-3 py-1.5 2xl:py-2 rounded-xl hover:text-brand-sky hover:bg-sky-50 transition-colors whitespace-nowrap">Berita</a>
+          <a href="#faq" class="px-2 2xl:px-3 py-1.5 2xl:py-2 rounded-xl hover:text-brand-sky hover:bg-sky-50 transition-colors whitespace-nowrap">Tanya Jawab</a>
+          <a href="#kontak" class="px-2 2xl:px-3 py-1.5 2xl:py-2 rounded-xl hover:text-brand-sky hover:bg-sky-50 transition-colors whitespace-nowrap">Kontak</a>
         </nav>
 
         <!-- Header Actions: WhatsApp & PPDB Button -->
-        <div class="flex items-center space-x-1.5 sm:space-x-3 shrink-0">
-          <!-- WhatsApp Quick Link (Single Line, Clean Badge) -->
+        <div class="flex items-center space-x-1 sm:space-x-2 2xl:space-x-3 shrink-0">
+          <!-- WhatsApp Quick Link (Visible on 2xl+ to avoid crowding on 1280-1440px laptops) -->
           <a href="https://wa.me/6287718082751?text=Halo%20Admin%20PAUD-KB%20Nurul%20Ilmi%20Sumberadi,%20saya%20ingin%20konsultasi%20mengenai%20pendaftaran%20siswa." 
              target="_blank" 
-             class="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full text-xs font-bold text-emerald-700 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 transition-colors whitespace-nowrap shrink-0">
+             class="hidden 2xl:inline-flex items-center gap-1.5 px-3 py-2 rounded-full text-xs font-bold text-emerald-700 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 transition-colors whitespace-nowrap shrink-0">
             <i class="fa-brands fa-whatsapp text-emerald-600 text-sm"></i>
             <span>0877-1808-2751</span>
           </a>
 
-          <!-- PPDB Online Button (CTA, Never Wraps) -->
-          <button type="button" class="btn-open-ppdb inline-flex items-center gap-1.5 px-3.5 py-2 sm:px-5 sm:py-2.5 rounded-full font-bold text-xs sm:text-sm text-white bg-gradient-to-r from-brand-orange to-brand-yellow hover:from-amber-600 hover:to-amber-500 shadow-md shadow-orange-200/50 hover:scale-105 active:scale-95 transition-all duration-200 whitespace-nowrap shrink-0">
+          <!-- PPDB Online Button (Scales smoothly on small phones <380px) -->
+          <button type="button" class="btn-open-ppdb inline-flex items-center gap-1 sm:gap-1.5 px-2.5 py-1.5 sm:px-4 sm:py-2 2xl:px-5 2xl:py-2.5 rounded-full font-bold text-xs sm:text-sm text-white bg-gradient-to-r from-brand-orange to-brand-yellow hover:from-amber-600 hover:to-amber-500 shadow-md shadow-orange-200/50 hover:scale-105 active:scale-95 transition-all duration-200 whitespace-nowrap shrink-0">
             <i class="fa-solid fa-graduation-cap"></i>
-            <span>Daftar PPDB</span>
+            <span><span class="hidden min-[380px]:inline">Daftar </span>PPDB</span>
           </button>
 
           <!-- Mobile Hamburger Toggle (Visible on screens below 1280px) -->
@@ -266,7 +266,7 @@
               </a>
             </div>
 
-            <h1 class="text-2xl sm:text-5xl xl:text-6xl font-extrabold font-playful tracking-tight leading-tight text-slate-900">
+            <h1 class="text-2xl sm:text-4xl md:text-5xl xl:text-6xl font-extrabold font-playful tracking-tight leading-tight text-slate-900">
               Tumbuh <span class="text-brand-sky">Ceria</span>, <span class="text-brand-orange">Cerdas</span> &amp; <span class="text-rainbow-glow">Berakhlak Mulia</span> Sejak Dini ✨
             </h1>
 
@@ -292,19 +292,19 @@
             <!-- Quick Trust Badges for Parents (Compact on Mobile 393px) -->
             <div class="pt-4 border-t border-slate-200/80 grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 text-center">
               <div class="p-2 sm:p-2.5 rounded-xl bg-white/80 border border-slate-100 shadow-xs">
-                <div class="text-brand-sky font-bold text-sm sm:text-lg font-playful">Bagong, Petruk, Semar</div>
+                <div class="text-brand-sky font-bold text-xs sm:text-base lg:text-lg font-playful">Bagong, Petruk, Semar</div>
                 <div class="text-[10px] sm:text-xs text-slate-500 font-medium leading-tight">KB Usia 2 - 5 Tahun</div>
               </div>
               <div class="p-2 sm:p-2.5 rounded-xl bg-white/80 border border-slate-100 shadow-xs">
-                <div class="text-amber-600 font-bold text-sm sm:text-lg font-playful">Mulai 75rb/Bln</div>
+                <div class="text-amber-600 font-bold text-xs sm:text-base lg:text-lg font-playful">Mulai 75rb/Bln</div>
                 <div class="text-[10px] sm:text-xs text-slate-500 font-medium leading-tight">Reguler &amp; Full Day</div>
               </div>
               <div class="p-2 sm:p-2.5 rounded-xl bg-white/80 border border-slate-100 shadow-xs">
-                <div class="text-brand-green font-bold text-sm sm:text-lg font-playful">100% Islami</div>
+                <div class="text-brand-green font-bold text-xs sm:text-base lg:text-lg font-playful">100% Islami</div>
                 <div class="text-[10px] sm:text-xs text-slate-500 font-medium leading-tight">Doa &amp; Tahfidz Cilik</div>
               </div>
               <div class="p-2 sm:p-2.5 rounded-xl bg-white/80 border border-slate-100 shadow-xs">
-                <div class="text-brand-pink font-bold text-sm sm:text-lg font-playful">Bebas Gedung</div>
+                <div class="text-brand-pink font-bold text-xs sm:text-base lg:text-lg font-playful">Bebas Gedung</div>
                 <div class="text-[10px] sm:text-xs text-slate-500 font-medium leading-tight">Tanpa Beban Uang Gedung</div>
               </div>
             </div>
@@ -334,7 +334,7 @@
                 </div>
 
                 <!-- Floating Playful Mini Badges (Contained Inside Mobile Width) -->
-                <div class="absolute -bottom-3 left-2 sm:-bottom-5 sm:-left-5 bg-white py-1.5 px-3 sm:py-2 sm:px-4 rounded-xl sm:rounded-2xl shadow-xl border border-slate-100 flex items-center gap-2 sm:gap-3 max-w-[85%]">
+                <div class="absolute -bottom-3 left-2 sm:left-2 lg:-left-4 bg-white py-1.5 px-3 sm:py-2 sm:px-4 rounded-xl sm:rounded-2xl shadow-xl border border-slate-100 flex items-center gap-2 sm:gap-3 max-w-[85%]">
                   <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-sm sm:text-lg shrink-0">
                     <i class="fa-solid fa-heart"></i>
                   </div>
@@ -344,7 +344,7 @@
                   </div>
                 </div>
 
-                <a href="https://referensi.data.kemendikdasmen.go.id/pendidikan/npsn/69838057" target="_blank" rel="noopener noreferrer" class="absolute -top-3 right-2 sm:-top-5 sm:-right-5 bg-white py-1.5 px-2.5 sm:py-2 sm:px-3.5 rounded-xl sm:rounded-2xl shadow-xl border border-slate-100 flex items-center gap-1.5 sm:gap-2 hover:bg-slate-50 transition-colors group" title="Verifikasi Kemendikdasmen RI">
+                <a href="https://referensi.data.kemendikdasmen.go.id/pendidikan/npsn/69838057" target="_blank" rel="noopener noreferrer" class="absolute -top-3 right-2 sm:right-2 lg:-right-4 bg-white py-1.5 px-2.5 sm:py-2 sm:px-3.5 rounded-xl sm:rounded-2xl shadow-xl border border-slate-100 flex items-center gap-1.5 sm:gap-2 hover:bg-slate-50 transition-colors group" title="Verifikasi Kemendikdasmen RI">
                   <div class="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-xs sm:text-sm shadow-xs shrink-0">
                     <i class="fa-solid fa-certificate"></i>
                   </div>
@@ -378,9 +378,9 @@
           </div>
 
           <div class="bg-white/10 sm:bg-transparent rounded-2xl p-3 sm:p-0">
-            <div class="text-2xl sm:text-5xl font-black font-playful text-emerald-300 counter-value" data-target="2" data-suffix=" Kelas">2 Kelas</div>
-            <div class="text-xs sm:text-sm font-semibold text-sky-100 mt-1">KB &amp; PAUD</div>
-            <div class="text-[10px] sm:text-xs text-sky-200 mt-0.5">Pendampingan berjenjang</div>
+            <div class="text-2xl sm:text-5xl font-black font-playful text-emerald-300 counter-value" data-target="3" data-suffix=" Kelas">3 Kelas</div>
+            <div class="text-xs sm:text-sm font-semibold text-sky-100 mt-1">Kelompok Bermain</div>
+            <div class="text-[10px] sm:text-xs text-sky-200 mt-0.5">Bagong, Petruk, Semar</div>
           </div>
 
           <div class="bg-white/10 sm:bg-transparent rounded-2xl p-3 sm:p-0">
@@ -397,6 +397,8 @@
 
         </div>
       </div>
+    </section>
+
     <!-- =========================================================================
          5. SELAYANG PANDANG / PROFIL SEKOLAH (VISI & MISI)
          ========================================================================= -->
@@ -725,7 +727,7 @@
         </div>
 
         <!-- 3 Cards Grid: Kelas Bagong, Kelas Petruk, & Kelas Semar -->
-        <div id="program-kelas" class="grid md:grid-cols-3 gap-8 mb-16">
+        <div id="program-kelas" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-16">
           
           <!-- Kelas 1: Kelas Bagong (2 - 3 Tahun) -->
           <div class="bg-white rounded-3xl overflow-hidden border-2 border-amber-200/80 shadow-md hover:shadow-2xl transition-all duration-300 flex flex-col justify-between card-hover-lift group">
@@ -850,7 +852,7 @@
           </div>
 
           <!-- Kelas 3: Kelas Semar (4 - 5 Tahun) -->
-          <div class="bg-white rounded-3xl overflow-hidden border-2 border-sky-200/80 shadow-md hover:shadow-2xl transition-all duration-300 flex flex-col justify-between card-hover-lift group">
+          <div class="bg-white rounded-3xl overflow-hidden border-2 border-sky-200/80 shadow-md hover:shadow-2xl transition-all duration-300 flex flex-col justify-between card-hover-lift group md:col-span-2 lg:col-span-1 md:max-w-md md:mx-auto lg:max-w-none w-full">
             <div>
               <!-- Top Banner -->
               <div class="bg-gradient-to-tr from-brand-sky to-blue-600 p-6 text-white text-center relative overflow-hidden">
@@ -2317,7 +2319,7 @@
         <input type="text" id="ppdb-nama-anak" required placeholder="Contoh: Muhammad Rayyan Alfatih" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-brand-sky">
       </div>
 
-      <div class="grid grid-cols-2 gap-4">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
         <div>
           <label for="ppdb-panggilan" class="block text-xs font-bold text-slate-700 mb-1">Nama Panggilan <span class="text-red-500">*</span></label>
           <input type="text" id="ppdb-panggilan" required placeholder="Contoh: Rayyan" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-brand-sky">
@@ -2343,7 +2345,7 @@
         </p>
       </div>
 
-      <div class="grid grid-cols-2 gap-4">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
         <div>
           <label for="ppdb-ortu" class="block text-xs font-bold text-slate-700 mb-1">Nama Ayah / Bunda <span class="text-red-500">*</span></label>
           <input type="text" id="ppdb-ortu" required placeholder="Contoh: Bunda Ratna" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-brand-sky">
@@ -2365,9 +2367,9 @@
       </div>
 
       <div class="pt-2">
-        <button type="submit" class="w-full py-3.5 rounded-2xl font-bold text-sm text-white bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 shadow-lg shadow-emerald-200 transition-all flex items-center justify-center gap-2">
-          <i class="fa-brands fa-whatsapp text-lg"></i>
-          <span>Kirim Formulir via WhatsApp (087718082751)</span>
+        <button type="submit" class="w-full py-3 sm:py-3.5 px-3 rounded-2xl font-bold text-xs sm:text-sm text-white bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 shadow-lg shadow-emerald-200 transition-all flex items-center justify-center gap-2 text-center">
+          <i class="fa-brands fa-whatsapp text-lg shrink-0"></i>
+          <span>Kirim Formulir via WhatsApp <span class="hidden min-[400px]:inline">(087718082751)</span></span>
         </button>
         <p class="text-[11px] text-slate-400 text-center mt-2">
           Data pendaftaran akan diformat rapi dan langsung diteruskan ke WhatsApp panitia PPDB PAUD-KB Nurul Ilmi.
@@ -2395,7 +2397,7 @@
   <div class="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 flex flex-col items-end">
     
     <!-- WhatsApp Floating Popup Card -->
-    <div id="wa-floating-popup" class="hidden mb-3 w-[calc(100vw-2rem)] max-w-sm sm:w-80 bg-white rounded-3xl shadow-2xl border border-slate-200/80 overflow-hidden transform transition-all animate-bounce-subtle">
+    <div id="wa-floating-popup" class="hidden mb-3 w-[calc(100%-1rem)] max-w-sm sm:w-80 bg-white rounded-3xl shadow-2xl border border-slate-200/80 overflow-hidden transform transition-all animate-bounce-subtle">
       <div class="bg-gradient-to-r from-emerald-600 to-teal-600 p-4 text-white flex items-center justify-between">
         <div class="flex items-center gap-2.5">
           <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center text-xl">

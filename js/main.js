@@ -316,6 +316,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Testimonial Swiper
     new Swiper('.testimonials-swiper', {
       loop: true,
+      slidesPerView: 1,
+      spaceBetween: 16,
       autoplay: {
         delay: 5000,
         disableOnInteraction: false,

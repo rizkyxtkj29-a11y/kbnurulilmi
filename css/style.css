@@ -17,19 +17,26 @@
   --bg-soft-green: #ecfdf5;
 }
 
-/* Smooth Scrolling */
+/* Box Sizing & Fluid Overflow Protection */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* Smooth Scrolling & Safe Viewport Bounds (Prevents Horizontal Scrollbar Cutoffs) */
 html {
   scroll-behavior: smooth;
   overflow-x: hidden;
-  max-width: 100vw;
+  max-width: 100%;
+  width: 100%;
 }
 
 body {
   font-family: 'Plus Jakarta Sans', sans-serif;
   color: #1e293b;
   overflow-x: hidden;
-  max-width: 100vw;
+  max-width: 100%;
   width: 100%;
+  position: relative;
   background-color: #fafbfc;
 }
 
@@ -265,9 +272,20 @@ dialog[open] {
   transform: translateY(1px) scale(0.98);
 }
 
-/* Mobile Polish & Safety Guards (Viewport <= 640px / 393px) */
+/* Responsive Polish & Universal Safety Guards (Small Phones <= 393px & Laptops 1024px - 1366px) */
 @media (max-width: 640px) {
   dialog {
-    max-width: calc(100vw - 1.5rem) !important;
+    max-width: calc(100% - 1.5rem) !important;
+    width: calc(100% - 1.5rem) !important;
   }
+}
+
+/* Ensure images and media elements never overflow their containers */
+img, svg, video, canvas, audio, iframe, embed, object {
+  max-width: 100%;
+}
+
+/* Prevent accidental text clipping and horizontal overflow */
+h1, h2, h3, h4, p, span, a, button {
+  overflow-wrap: break-word;
 }
